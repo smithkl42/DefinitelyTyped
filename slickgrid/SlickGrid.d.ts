@@ -1121,7 +1121,7 @@ declare module Slick {
 		public onBeforeHeaderRowCellDestroy: Slick.Event<OnBeforeHeaderRowCellDestroyEventData<T>>;
 		public onMouseEnter: Slick.Event<OnMouseEnterEventData>;
 		public onMouseLeave: Slick.Event<OnMouseLeaveEventData>;
-		public onClick: Slick.Event<OnClickEventData>;
+		public onClick: Slick.Event<OnClickEventData<T>>;
 		public onDblClick: Slick.Event<OnDblClickEventData>;
 		public onContextMenu: Slick.Event<OnContextMenuEventData>;
 		public onKeyDown: Slick.Event<OnKeyDownEventData>;
@@ -1274,9 +1274,10 @@ declare module Slick {
 		cell: number;
 	}
 
-	export interface OnClickEventData {
+	export interface OnClickEventData<T extends SlickData> {
 		row: number;
-		cell: number;
+        cell: number;
+        grid: Slick.Grid<T>
 	}
 
 	export interface OnMouseLeaveEventData {
@@ -1582,8 +1583,8 @@ declare module Slick {
 		export interface OnRowCountChangedEventData {
 			// empty
 		}
-		export interface OnRowsChangedEventData {
-			// empty
+        export interface OnRowsChangedEventData {
+            rows:number[]
 		}
 		export interface OnPagingInfoChangedEventData extends PagingOptions {
 
